@@ -1,6 +1,14 @@
 
+$(function() {
+
 // pahile hints hide garney...
 $('form span').hide();
+
+// get value
+var password = $('#password');
+var confirmPassword = $('#confirm_password').val();
+
+console.log(confirmPassword);
 
 // event checking
 function passwordEvent() {
@@ -16,7 +24,7 @@ function passwordEvent() {
 
 $('#password').focus(passwordEvent).keyup(passwordEvent);
 
-function confirmPasswordEvent() {s
+function confirmPasswordEvent() {
 
     // checking password is mataching or not first
     if ($('#password').val() === $('confirm_password').val()) {
@@ -28,3 +36,5 @@ function confirmPasswordEvent() {s
 }
 
 $('#confirm_password').focus(confirmPasswordEvent).keyup(confirmPasswordEvent);
+
+});
