@@ -6,35 +6,57 @@ $('form span').hide();
 
 // get value
 var password = $('#password');
-var confirmPassword = $('#confirm_password').val();
+var confirmPassword = $('#confirm_password');
 
-console.log(confirmPassword);
+// var pass = $('#password').val();
 
-// event checking
-function passwordEvent() {
-    if($(this).val().length > 8) {
+// console.log(confirmPassword);
+
+// password not less than 8 case
+function isPasswordValid() {
+    return password.value > 8;
+}
+
+// for confirmation password input
+function isMatchPassword() {
+    return password.value === confirmPassword.value;
+}
+
+// enable submit button after all OK
+function submitEnable() {
+    // return isPasswordValid() && isMatchPassword();
+    console.log("working...");
+    $('#submit').prop('disabled', function() {
+        return (isPasswordValid() && isMatchPassword());
+    });
+}
+
+
+// event checking for password input
+function passwordCallback() {
+    if(isPasswordValid()) {
 // hide if valid
-        $(this).next().hide();
+        password.next().hide();
     } else {
         // show hint
-        $(this).next().show();
+        password.next().show();
     }
 
 }
 
-$('#password').focus(passwordEvent).keyup(passwordEvent);
+password.focus(passwordCallback).keyup(passwordCallback).keyup(confirm_password).keyup(submitEnable);
 
 function confirmPasswordEvent() {
 
     // checking password is mataching or not first
-    if ($('#password').val() === $('confirm_password').val()) {
-        $(this).next().hide();
+    if (isMatchPassword()) {
+        confirmPassword.next().hide();
     } else {
         // then display
-        $(this).next().show();
+        confirmPassword.next().show();
     }
 }
 
-$('#confirm_password').focus(confirmPasswordEvent).keyup(confirmPasswordEvent);
+confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(submitEnable);
 
 });
